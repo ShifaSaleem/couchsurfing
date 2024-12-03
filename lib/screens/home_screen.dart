@@ -1,3 +1,4 @@
+import 'package:couchsurfing/components/button.dart';
 import 'package:couchsurfing/screens/profile_screen.dart';
 import 'package:couchsurfing/screens/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -58,54 +59,156 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Couchsurfing')),
-      body: ListView(
-        padding: EdgeInsets.all(16),
-        children: [
-          Text(
-            'Welcome to Couchsurfing',
-            style: headerText20(),
-          ),
-          SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text('Find a Host'),
-          ),
-          SizedBox(height: 20),
-          Text('Featured Hosts', style: headerText20()),
-          SizedBox(height: 10),
-          SizedBox(
-            height: 150,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: DummyData.featuredHosts.length,
-              itemBuilder: (context, index) {
-                final host = DummyData.featuredHosts[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => HostProfileScreen(host: DummyData.featuredHosts[index],)));
+      appBar: AppBar(
+        title: Text('Couchsurfing'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Welcome Section
+              Text(
+                'Welcome to Couchsurfing!',
+                style: headerText24(),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Find a host or explore amazing destinations.',
+                style: bodyText14(),
+              ),
+              SizedBox(height: 16),
+              DefaultButton(
+                  labelText: 'Find a Host',
+                  textStyle: headerText16().copyWith(color: Colors.white),
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const HostsListsScreen(),));
                   },
-                  child: Container(
-                    width: 120,
-                    margin: EdgeInsets.only(right: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(host.photo, height: 100, fit: BoxFit.cover),
+                  backgroundColor: primaryColor,
+              ),
+              SizedBox(height: 24),
+
+              // Featured Hosts Section
+              Text(
+                'Featured Hosts',
+                style: headerText20(),
+              ),
+              SizedBox(height: 8),
+              SizedBox(
+                height: 150,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: DummyData.featuredHosts.length,
+                  itemBuilder: (context, index) {
+                    final host = DummyData.featuredHosts[index];
+                    return GestureDetector(
+                      onTap: () {
+                        // Navigate to Host Profile Page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HostProfileScreen(host: host),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 120,
+                        margin: EdgeInsets.only(right: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              radius: 40,
+                              backgroundImage: NetworkImage(host.photo),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              host.name,
+                              style: headerText14(),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              host.location,
+                              style: bodyText12(),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 5),
-                        Text(host.name, style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(host.location),
-                      ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 24),
+
+              // Featured Destinations Section
+              Text(
+                'Featured Destinations',
+                style: headerText20(),
+              ),
+              SizedBox(height: 8),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: DummyData.destinations.length,
+                itemBuilder: (context, index) {
+                  final destination = DummyData.destinations[index];
+                  return GestureDetector(
+                    onTap: () {
+                      // Navigate to Destination Details Page
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.horizontal(
+                              left: Radius.circular(8),
+                            ),
+                            child: Image.network(
+                              destination.photo,
+                              width: 120,
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(width: 16),
+                          Expanded( // Ensures the text fits dynamically
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  destination.name,
+                                  style: headerText16(),
+                                  overflow: TextOverflow.ellipsis, // Prevents overflow by truncating text
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  destination.location,
+                                  style: bodyText14(),
+                                  overflow: TextOverflow.ellipsis, // Prevents overflow by truncating text
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  destination.description,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis, // Truncates overflowing text
+                                  style: bodyText12(),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
+                  );
+                },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

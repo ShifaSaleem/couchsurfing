@@ -30,7 +30,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: isMe ? primaryColor.withOpacity(40) : Colors.grey[300],
+                      color: isMe ? primaryColor.withOpacity(0.5) : Colors.grey[300],
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(isMe ? 'Hello!' : 'Hi there!'),

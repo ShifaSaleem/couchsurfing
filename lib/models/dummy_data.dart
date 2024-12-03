@@ -8,26 +8,31 @@ class DummyData {
     Destination(
       name: 'Santorini, Greece',
       description: 'Beautiful islands with whitewashed houses.',
+      location: 'Santorini, Greece',
       photo: 'https://via.placeholder.com/150',
     ),
     Destination(
       name: 'Kyoto, Japan',
       description: 'Historic temples and traditional tea houses.',
+      location: 'Kyoto, Japan',
       photo: 'https://via.placeholder.com/150',
     ),
     Destination(
       name: 'Cappadocia, Turkey',
       description: 'Famous for hot air balloons and unique landscapes.',
+      location: 'Cappadocia, Turkey',
       photo: 'https://via.placeholder.com/150',
     ),
     Destination(
       name: 'Reykjavik, Iceland',
       description: 'Experience the northern lights and natural hot springs.',
+      location: 'Reykjavik, Iceland',
       photo: 'https://via.placeholder.com/150',
     ),
     Destination(
       name: 'Maui, Hawaii',
       description: 'Pristine beaches and lush tropical scenery.',
+      location: 'Maui, Hawaii',
       photo: 'https://via.placeholder.com/150',
     ),
   ];
@@ -92,6 +97,30 @@ class DummyData {
       availableDates: [DateTime(2024, 11, 15)],
       reviews: [
         Review(reviewerName: 'Emma', comment: 'Great experience, very kind host.'),
+      ],
+    ),
+    Host(
+      name: 'Lisa',
+      location: 'NY, USA',
+      photo: 'https://via.placeholder.com/150',
+      rating: 4.5,
+      bio: 'Loves hosting travelers and exploring new cultures.',
+      availableDates: [DateTime(2024, 12, 1), DateTime(2024, 12, 5)],
+      reviews: [
+        Review(reviewerName: 'John', comment: 'Wonderful host! Highly recommended.'),
+        Review(reviewerName: 'Sara', comment: 'Very welcoming and friendly.'),
+      ],
+    ),
+    Host(
+      name: 'Adrian',
+      location: 'Tokyo, Japan',
+      photo: 'https://via.placeholder.com/150',
+      rating: 4.5,
+      bio: 'Loves hosting travelers and exploring new cultures.',
+      availableDates: [DateTime(2024, 12, 1), DateTime(2024, 12, 5)],
+      reviews: [
+        Review(reviewerName: 'John', comment: 'Wonderful host! Highly recommended.'),
+        Review(reviewerName: 'Sara', comment: 'Very welcoming and friendly.'),
       ],
     ),
   ];
